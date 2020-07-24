@@ -42,14 +42,15 @@ Install dependencies on virtual environment
    
 ## Demo
 Once you cloned repository and done virtual environment setup and OpenVINO Initialization, you can run below command to run basic demo .
-
-    main.py   -fdm .\models\face-detection-adas-0001\FP32\face-detection-adas-0001 -flm .\models\landmarks-regression-retail-0009\FP32\landmarks-regression-retail-0009 -hpm .\models\head-pose-estimation-adas-0001\FP32\head-pose-estimation-adas-0001 -gem .\models\gaze-estimation-adas-0002\FP32\gaze-estimation-adas-0002 -i .\demo.mp4 
+```
+ python3 main.py   -fdm .\models\face-detection-adas-0001\FP32\face-detection-adas-0001 -flm .\models\landmarks-regression-retail-0009\FP32\landmarks-regression-retail-0009 -hpm .\models\head-pose-estimation-adas-0001\FP32\head-pose-estimation-adas-0001 -gem .\models\gaze-estimation-adas-0002\FP32\gaze-estimation-adas-0002 -i .\demo.mp4 
+ ```
    You should see video window open with inference output annotated and mouse pointer following person gaze. Below is short demo output.
 ![Demo Screenshot](https://github.com/chetancyber24/Gaze-Based-Computer-Pointer-Controller--Using-OpenVINO-/blob/master/demo.gif)
 ## Documentation
 To get more details about command line arguments of program, run below command
 
-    python main.py --help
+    python3 main.py --help
 Below its output:
 
     usage: main.py [-h] -i INPUT -fdm FACE_DETECT_MODEL -flm FACE_LANDMARKS_MODEL
