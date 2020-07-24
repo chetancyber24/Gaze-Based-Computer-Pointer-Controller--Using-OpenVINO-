@@ -11,18 +11,21 @@ Purpose of this project is to control mouse pointer based on eye's gaze using Op
  
  **Clone Repo**
  
- To clone this repo, run below command.   
+ To clone this repo, run below command.
+ ```
 git clone https://github.com/chetancyber24/Gaze-Based-Computer-Pointer-Controller--Using-OpenVINO-/
+```
 
 **Setup Python Virtual Environment**
+
 To setup your own  Python Virtual Environment run below command on command prompt 
 
     python -m venv  <folder_ path_your_virtual_env>
     
  To activate virtual environment run below command on command prompt
- 
+ ```
  <folder_ path_your_virtual_env>\Scripts\activate.bat
-
+```
 Install dependencies on virtual environment
 
     pip install -r requirements.txt 
@@ -110,7 +113,89 @@ Below its output:
  2. Model Paths Argument (-fdm,-flm ,-hpm,-gem)- Model path should be specified by this argument. Format is : **<model_path_dir_of_xml_and_bin_file >\model_name**. -fdm,-flm ,-hpm,-gem specify model path for face detection, face landmarks detection ,head pose estimation and gaze estimation model.
 
 **Directory structure**
-   
+   ```
+   C:.
+│   .gitattributes
+│   demo.gif
+│   demo.mp4
+│   face_detection.py
+│   facial_landmarks_detection.py
+│   gaze_estimation.jpg
+│   gaze_estimation.py
+│   head_pose_estimation.py
+│   inference_pipeline.png
+│   input_feeder.py
+│   input_feeder_old.py
+│   main.py
+│   mouse_controller.py
+│   README.md
+│   requirements.txt
+│   set_openvino.bat
+│
+├───Benchmark_results
+│       FP16_stat_file.txt
+│       FP32_stat_file.txt
+│       INT8_stat_file.txt
+│
+└───models
+    ├───face-detection-adas-0001
+    │   ├───FP16
+    │   │       face-detection-adas-0001.bin
+    │   │       face-detection-adas-0001.xml
+    │   │
+    │   ├───FP16-INT8
+    │   │       face-detection-adas-0001.bin
+    │   │       face-detection-adas-0001.xml
+    │   │
+    │   └───FP32
+    │           face-detection-adas-0001.bin
+    │           face-detection-adas-0001.xml
+    │
+    ├───face-detection-adas-binary-0001
+    │   └───FP32-INT1
+    │           face-detection-adas-binary-0001.bin
+    │           face-detection-adas-binary-0001.xml
+    │
+    ├───gaze-estimation-adas-0002
+    │   ├───FP16
+    │   │       gaze-estimation-adas-0002.bin
+    │   │       gaze-estimation-adas-0002.xml
+    │   │
+    │   ├───FP16-INT8
+    │   │       gaze-estimation-adas-0002.bin
+    │   │       gaze-estimation-adas-0002.xml
+    │   │
+    │   └───FP32
+    │           gaze-estimation-adas-0002.bin
+    │           gaze-estimation-adas-0002.xml
+    │
+    ├───head-pose-estimation-adas-0001
+    │   ├───FP16
+    │   │       head-pose-estimation-adas-0001.bin
+    │   │       head-pose-estimation-adas-0001.xml
+    │   │
+    │   ├───FP16-INT8
+    │   │       head-pose-estimation-adas-0001.bin
+    │   │       head-pose-estimation-adas-0001.xml
+    │   │
+    │   └───FP32
+    │           head-pose-estimation-adas-0001.bin
+    │           head-pose-estimation-adas-0001.xml
+    │
+    └───landmarks-regression-retail-0009
+        ├───FP16
+        │       landmarks-regression-retail-0009.bin
+        │       landmarks-regression-retail-0009.xml
+        │
+        ├───FP16-INT8
+        │       landmarks-regression-retail-0009.bin
+        │       landmarks-regression-retail-0009.xml
+        │
+        └───FP32
+                landmarks-regression-retail-0009.bin
+                landmarks-regression-retail-0009.xml
+                
+```
 
 ## Benchmarks
 Below is benchmarks results for all 4 models across different precision(FP32, FP16 & INT8) with respect to different performance matrix i.e. Model Load Time, Inference Time, FPS and Memory Footprint. These results are obtained on 8th Gen Intel core i5 8350u @1.7GHz, 16GB RAM with 64- Bit Windows 10  Enterprise version. OpenVINO Version is 2020.3.194.
