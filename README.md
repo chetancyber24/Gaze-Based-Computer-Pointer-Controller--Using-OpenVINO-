@@ -110,7 +110,7 @@ Below its output:
  2. Model Paths Argument (-fdm,-flm ,-hpm,-gem)- Model path should be specified by this argument. Format is : **<model_path_dir_of_xml_and_bin_file >\model_name**. -fdm,-flm ,-hpm,-gem specify model path for face detection, face landmarks detection ,head pose estimation and gaze estimation model.
 
 **Directory structure**
-
+   
 
 ## Benchmarks
 Below is benchmarks results for all 4 models across different precision(FP32, FP16 & INT8) with respect to different performance matrix i.e. Model Load Time, Inference Time, FPS and Memory Footprint. These results are obtained on 8th Gen Intel core i5 8350u @1.7GHz, 16GB RAM with 64- Bit Windows 10  Enterprise version. OpenVINO Version is 2020.3.194.
@@ -148,8 +148,10 @@ Below is benchmarks results for all 4 models across different precision(FP32, FP
 | Gaze   Estimation Model          | 584.8  | 478.5  | 699.3  |
 | All 4   Model                    | 45.1   | 48.1   | 62.7   |
 
-=======================================================
+===========================================================
+
 **Model Size in MB**
+
 |                                  | FP32 | FP16 | INT8 |
 |----------------------------------|------|------|------|
 | Face   Detection Model           | 4    | 2    | 1    |
