@@ -2,7 +2,7 @@
 
 ## Introduction
 Purpose of this project is to control mouse pointer based on eye's gaze using OpenVINO IR models. Before doing Gaze estimation , input video or cam feed need to pass through face detection model, face landmarks, head pose estimation model. Below is flow chart of inference pipeline.
-![Diagram showing the flow of data from the input, through the different models, to the mouse controller. ](https://video.udacity-data.com/topher/2020/April/5e923081_pipeline/pipeline.png)  
+![Diagram showing the flow of data from the input, through the different models, to the mouse controller. ](https://github.com/chetancyber24/Gaze-Based-Computer-Pointer-Controller--Using-OpenVINO-/blob/master/inference_pipeline.png)  
 ## Project Set Up and Installation
 **Prerequisite Software  Requirement**
 
@@ -10,8 +10,9 @@ Purpose of this project is to control mouse pointer based on eye's gaze using Op
  2. Python 3
  
  **Clone Repo**
+ 
  To clone this repo, run below command.   
-git clone 
+git clone https://github.com/chetancyber24/Gaze-Based-Computer-Pointer-Controller--Using-OpenVINO-/
 
 **Setup Python Virtual Environment**
 To setup your own  Python Virtual Environment run below command on command prompt 
@@ -41,7 +42,7 @@ Once you cloned repository and done virtual environment setup and OpenVINO Initi
 
     main.py   -fdm .\models\face-detection-adas-0001\FP32\face-detection-adas-0001 -flm .\models\landmarks-regression-retail-0009\FP32\landmarks-regression-retail-0009 -hpm .\models\head-pose-estimation-adas-0001\FP32\head-pose-estimation-adas-0001 -gem .\models\gaze-estimation-adas-0002\FP32\gaze-estimation-adas-0002 -i .\demo.mp4 
    You should see video window open with inference output annotated and mouse pointer following person gaze. Below is short demo output.
-
+![Demo Screenshot](https://github.com/chetancyber24/Gaze-Based-Computer-Pointer-Controller--Using-OpenVINO-/blob/master/demo.gif)
 ## Documentation
 To get more details about command line arguments of program, run below command
 
