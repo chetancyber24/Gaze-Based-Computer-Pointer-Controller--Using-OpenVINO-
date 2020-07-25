@@ -1,5 +1,7 @@
 from openvino.inference_engine import IECore,IEPlugin
 import cv2,sys
+import logging as log
+import traceback
 '''
 This is a sample class for a model. You may choose to use it as-is or make any changes to it.
 This has been provided just to give you an idea of how to structure your model class.
@@ -25,47 +27,66 @@ class FaceLandmarksDetection:
         self.model_output_name = None
         self.model_input_shape = None
         self.model_output_shape = None
-        
+        log.basicConfig(level=log.ERROR)
        
 
     def load_model(self):
-        #Instantiate IECore plugin
-        self.plugin = IECore()
-        #Load CPU Extension if any
-        if((self.extensions is not None) and self.device=='CPU'):
-            self.plugin.add_extension(self.extensions,self.device)
-        #Read IR Model
-        self.model=self.plugin.read_network(model=self.model_xml, weights=self.model_weights)
-        #Check if all layers in network supported by device plugin
-        self.check_model()
-        #Load network to plugin 
-        self.infer_net=self.plugin.load_network(network=self.model, device_name=self.device, num_requests=1)
-        
-        #Get model input ,output layer name and shape
-        self.model_input_name = next(iter(self.model.inputs)) 
-        self.model_output_name = next(iter(self.model.outputs))
-        self.model_input_shape = self.model.inputs[self.model_input_name].shape
-        self.model_output_shape = self.model.outputs[self.model_output_name].shape
-
+        '''
+        Load Face Landmarks Detection IR Model to Device Plugin.
+        '''
+        try:
+            #Instantiate IECore plugin
+            self.plugin = IECore()
+            #Load CPU Extension if any
+            if((self.extensions is not None) and self.device=='CPU'):
+                self.plugin.add_extension(self.extensions,self.device)
+            #Read IR Model
+            self.model=self.plugin.read_network(model=self.model_xml, weights=self.model_weights)
+            #Check if all layers in network supported by device plugin
+            self.check_model()
+            #Load network to plugin 
+            self.infer_net=self.plugin.load_network(network=self.model, device_name=self.device, num_requests=1)
+            
+            #Get model input ,output layer name and shape
+            self.model_input_name = next(iter(self.model.inputs)) 
+            self.model_output_name = next(iter(self.model.outputs))
+            self.model_input_shape = self.model.inputs[self.model_input_name].shape
+            self.model_output_shape = self.model.outputs[self.model_output_name].shape
+        except Exception as e:
+            log.error("Failed to Read & Load Face Landmarks Detection Model, Check whether model path and file is valid.")
+            log.error("Exception Error Type:{}".format(str(e)))
+            log.error("###Below is traceback for Debug###")
+            log.error(traceback.format_exc())
+            log.error("Program will Exit!!!")
+            sys.exit(0)
+    
+    
     def predict(self,preprocess_image):
-        
+        '''
+        Run Inference for Face Landmarks Detection Model.
+        '''
         outputs = self.infer_net.infer({self.model_input_name:preprocess_image})
         return outputs
         
 
     def check_model(self):
+        '''
+        Check Supported Layers for Face Landmarks Detection Model.
+        '''
         layers_supported = self.plugin.query_network(network=self.model, device_name=self.device)#Get supported layers by plugin
         layers_unsupported =[] 
         for layer in self.model.layers.keys():
             if(layer not in layers_supported):
                layers_unsupported.append(layer)
         if(len(layers_unsupported) !=0):
-            print(" Unsupported layers present for Face Landmar Detection model . Provide right CPU Extension. Will Exit Now.")
+            log.error(" Unsupported layers present for Face Landmar Detection model . Provide right CPU Extension. Will Exit Now.")
             sys.exit(0)
 
     def preprocess_input(self, image,bb_coord,padding=0):
         
-       
+        '''
+        Preprocess Input for Face Landmarks Detection Model.
+        '''
         self.bb_coord =bb_coord
         self.input_image=image
         # Get Cropped face based on bounding box coordinates from Face detection Model
@@ -81,7 +102,9 @@ class FaceLandmarksDetection:
 
     def preprocess_output(self, annotated_image,outputs,annotation_flag = True):
         
-        
+        '''
+        Preprocess Output for Face Landmarks Detection Model before feeding it to next model.
+        '''
         
         landmarks_det_out = outputs[self.model_output_name]
         

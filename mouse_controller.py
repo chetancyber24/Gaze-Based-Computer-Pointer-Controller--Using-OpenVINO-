@@ -10,6 +10,9 @@ This class is provided to help get you started; you can choose whether you want 
 import pyautogui
 
 class MouseController:
+    '''
+    Class to control mouse pointer movement
+    '''
     def __init__(self, precision, speed):
         pyautogui.FAILSAFE = False
         pyautogui.PAUSE = 0
@@ -29,8 +32,15 @@ class MouseController:
         
 
     def move(self, x, y,):
+        '''
+        Method to move pointer to x,y(relative) coordinate.
+        '''
         pyautogui.moveRel(x*self.precision, -1*y*self.precision, duration=self.speed)#
+    
     def move_mouse_to_center(self):
+        '''
+        Method to reset mouse pointer to center of screen.
+        '''
         screen_res = pyautogui.size()
         #print("Mouse_speed",self.speed)
         pyautogui.moveTo(int(screen_res[0]/2),int(screen_res[1]/2),0)
